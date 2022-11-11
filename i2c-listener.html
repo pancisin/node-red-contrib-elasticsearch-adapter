@@ -1,0 +1,91 @@
+<script type="text/html" data-template-name="i2clistener">
+  <div class="form-row">
+    <label for="node-input-stack"
+      ><i class="fa fa-align-justify"></i> Board Stack Level</label
+    >
+    <input id="node-input-stack" placeholder="[msg.stack]" min="0" max="7" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-channel"
+      ><i class="fa fa-exchange"></i> Channel Number</label
+    >
+    <input
+      id="node-input-channel"
+      placeholder="[msg.channel]"
+      min="0"
+      max="16"
+    />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-send"
+      ><i class="fa fa-paper-plane-o"></i> Send</label
+    >
+    <input id="node-input-send" type="text" placeholder="[msg.send]" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="i2clistener">
+  <p>Provides a connection to an Sequent Microsystems 16-Inputs card.</p>
+  <p>
+    Each message received by the node generate a <code>msg.payload</code> with
+    the state of one channel from 16 or a bitmap of all channels if the selected
+    <code> channel </code> is 0
+  </p>
+  <p>
+    You can specify the card stack level in the edit dialog box or
+    programaticaly with the input message <code>msg.stack</code>
+  </p>
+  <p>
+    You can specify the channel number in the edit dialog box or programaticaly
+    with the input message <code>msg.channel</code>
+  </p>
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType("i2clistener", {
+    category: "pancisin",
+    defaults: {
+      name: { value: "" },
+      stack: { value: "1" },
+      channel: { value: "1" },
+      send: { value: "" },
+    },
+    color: "#7a9da6",
+    inputs: 0,
+    outputs: 1,
+    // icon: "optocoupler.png",
+    align: "left",
+    label: function () {
+      return this.name || "i2c-listener";
+    },
+    labelStyle: function () {
+      return this.name ? "node_label_italic" : "";
+    },
+    oneditprepare: function () {
+      if (this.stack === undefined) {
+        $("#node-input-stack").val(1);
+      }
+
+      $("#node-input-stack").spinner({
+        min: 0,
+        max: 7,
+      });
+
+      if (this.channel === undefined) {
+        $("#node-input-channel").val(1);
+      }
+
+      $("#node-input-channel").spinner({
+        min: 0,
+        max: 16,
+      });
+    },
+  });
+</script>
