@@ -72,6 +72,14 @@ class I2CBus {
     );
     return id;
   }
+  
+  unregister(listenerId) {
+    const { [listenerId]: subscriber, ...newSubscribers } = this.subscribers;
+    this.subscribers = newSubscribers;
+     logger.info(
+      `Removed Subscriber ${id} (lvl: ${stackLevel}, ch: ${channel}).`
+    );
+  }
 
   start() {
     if (this.port == null) {

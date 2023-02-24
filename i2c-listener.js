@@ -19,7 +19,7 @@ module.exports = function (RED) {
     };
     var node = this;
 
-    bus.register(this.stack, this.channel, (value) => {
+    var listenerId = bus.register(this.stack, this.channel, (value) => {
       if (node.value !== value) {
         node.send({
           payload: node.getPayload(value !== 0),
@@ -28,6 +28,10 @@ module.exports = function (RED) {
         });
         node.value = value;
       }
+    });
+    
+    this.on('close', () => {
+      bus.unregister(listenerId);
     });
   }
 
