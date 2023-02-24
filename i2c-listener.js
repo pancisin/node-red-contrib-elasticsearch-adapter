@@ -29,8 +29,8 @@ module.exports = function (RED) {
         node.value = value;
       }
     });
-    
-    this.on('close', () => {
+
+    this.on("close", () => {
       bus.unregister(listenerId);
     });
   }

@@ -72,11 +72,21 @@ class I2CBus {
     );
     return id;
   }
-  
+
   unregister(listenerId) {
-    const { [listenerId]: subscriber, ...newSubscribers } = this.subscribers;
-    this.subscribers = newSubscribers;
-     logger.info(
+    const subscribersList = Object.values(this.subscribers).filter(
+      (s) => s.id !== listenerId
+    );
+
+    this.subscribers = subscribersList.reduce(
+      (acc, cur) => ({
+        ...acc,
+        [cur.id]: cur,
+      }),
+      {}
+    );
+
+    logger.info(
       `Removed Subscriber ${id} (lvl: ${stackLevel}, ch: ${channel}).`
     );
   }
