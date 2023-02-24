@@ -30,7 +30,7 @@ module.exports = function (RED) {
       }
     });
 
-    this.on("close", () => {
+    this.on("close", function () {
       bus.unregister(listenerId);
     });
   }
