@@ -30,7 +30,10 @@ module.exports = function (RED) {
       }
     });
 
+    this.log("Bus listener registered with id: " + listenerId);
+
     this.on("close", function () {
+      node.log("On close event triggered.");
       bus.unregister(listenerId);
     });
   }
