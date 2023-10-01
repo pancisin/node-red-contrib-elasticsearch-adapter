@@ -40,33 +40,38 @@ module.exports = function (RED) {
       console.log("no server config node!");
     }
 
+    const { v4: uuidv4 } = require("uuid");
+
     this.on("input", function (msg, send, done) {
       if (this.esClient == null) {
         console.error("There is not an elasticSearch client registered!");
         done();
       }
 
+      const documentId = msg.documentId || uuidv4();
+
       this.esClient
         .create({
-          id: msg.id,
+          id: documentId,
           index: msg.index || node.index,
           document: msg.payload,
         })
         .then((response) => {
           send(response);
           console.log(response);
+
+          if (done) {
+            done();
+          }
         })
         .catch((err) => {
           if (done) {
             done(err);
+            return;
           }
 
           console.error(err);
         });
-
-      if (done) {
-        done();
-      }
     });
 
     this.on("close", function () {

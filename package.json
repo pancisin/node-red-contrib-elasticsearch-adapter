@@ -4,7 +4,8 @@
   "bundleDependencies": [],
   "dependencies": {
     "@elastic/elasticsearch": "^8.10.0",
-    "log4js": "^6.5.2"
+    "log4js": "^6.5.2",
+    "uuid": "^9.0.1"
   },
   "deprecated": false,
   "description": "",
