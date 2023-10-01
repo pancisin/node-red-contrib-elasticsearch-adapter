@@ -16,7 +16,8 @@
   "license": "MIT",
   "node-red": {
     "nodes": {
-      "elasticsearch-create": "./nodes/elasticsearch-create.js"
+      "elasticsearch-create": "./nodes/elasticsearch-create.js",
+      "elasticsearch-server": "./nodes/elasticsearch-server.js"
     }
   }
 }
