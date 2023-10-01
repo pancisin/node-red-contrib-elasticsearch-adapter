@@ -39,7 +39,9 @@ module.exports = function (RED) {
         });
 
         console.log(response);
-      } catch (err) {}
+      } catch (err) {
+        console.error(err);
+      }
 
       if (done) {
         done();
