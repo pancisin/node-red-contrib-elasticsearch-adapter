@@ -42,13 +42,16 @@ module.exports = function (RED) {
       }
 
       try {
-        const response = this.esClient.create({
-          id: msg.id,
-          index: msg.index || node.index,
-          document: msg.payload,
-        });
-
-        console.log(response);
+        this.esClient
+          .create({
+            id: msg.id,
+            index: msg.index || node.index,
+            document: msg.payload,
+          })
+          .then((response) => {
+            send(response);
+            console.log(response);
+          });
       } catch (err) {
         console.error(err);
       }
