@@ -7,6 +7,7 @@ module.exports = function (RED) {
 
     this.server = RED.nodes.getNode(config.server);
     this.index = config.index;
+    this.esClient = null;
 
     if (this.server != null) {
       const { Client } = require("@elastic/elasticsearch");
@@ -15,7 +16,7 @@ module.exports = function (RED) {
       const apiKey =
         "cXBaQzRvb0JTR3I0Y2NEZDduOG46RlVSZjNOOGRUVHlPVFFZWlVaU3VPQQ==";
 
-      const client = new Client({
+      this.esClient = new Client({
         node: nodeUrl,
         auth: {
           apiKey,
@@ -26,13 +27,22 @@ module.exports = function (RED) {
           rejectUnauthorized: false,
         },
       });
+
+      this.esClient.info().then((response) => {
+        console.log(response);
+      });
     } else {
       console.log("no server config node!");
     }
 
     this.on("input", function (msg, send, done) {
+      if (esClient == null) {
+        console.error("There is not an elasticSearch client registered!");
+        done();
+      }
+
       try {
-        const response = client.create({
+        const response = esClient.create({
           id: msg.id,
           index: msg.index || node.index,
           document: msg.payload,
