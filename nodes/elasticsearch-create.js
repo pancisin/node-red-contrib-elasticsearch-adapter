@@ -28,9 +28,14 @@ module.exports = function (RED) {
         },
       });
 
-      this.esClient.info().then((response) => {
-        console.log(response);
-      });
+      this.esClient
+        .info()
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     } else {
       console.log("no server config node!");
     }
@@ -41,20 +46,23 @@ module.exports = function (RED) {
         done();
       }
 
-      try {
-        this.esClient
-          .create({
-            id: msg.id,
-            index: msg.index || node.index,
-            document: msg.payload,
-          })
-          .then((response) => {
-            send(response);
-            console.log(response);
-          });
-      } catch (err) {
-        console.error(err);
-      }
+      this.esClient
+        .create({
+          id: msg.id,
+          index: msg.index || node.index,
+          document: msg.payload,
+        })
+        .then((response) => {
+          send(response);
+          console.log(response);
+        })
+        .catch((err) => {
+          if (done) {
+            done(err);
+          }
+
+          console.error(err);
+        });
 
       if (done) {
         done();
