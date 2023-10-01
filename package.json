@@ -8,7 +8,7 @@
   },
   "deprecated": false,
   "description": "",
-  "main": "elasticsearch-adapter.js",
+  "main": "elasticsearch-create.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,7 +16,7 @@
   "license": "MIT",
   "node-red": {
     "nodes": {
-      "elasticsearch-create": "./nodes/elasticsearch-adapter.js",
+      "elasticsearch-create": "./nodes/elasticsearch-create.js",
       "elasticsearch-server": "./nodes/elasticsearch-server.js"
     }
   }
