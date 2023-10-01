@@ -36,13 +36,13 @@ module.exports = function (RED) {
     }
 
     this.on("input", function (msg, send, done) {
-      if (esClient == null) {
+      if (this.esClient == null) {
         console.error("There is not an elasticSearch client registered!");
         done();
       }
 
       try {
-        const response = esClient.create({
+        const response = this.esClient.create({
           id: msg.id,
           index: msg.index || node.index,
           document: msg.payload,
