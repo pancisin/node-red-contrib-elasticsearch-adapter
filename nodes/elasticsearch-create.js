@@ -58,8 +58,6 @@ module.exports = function (RED) {
         })
         .then((response) => {
           send(response);
-          console.log(response);
-
           if (done) {
             done();
           }
@@ -69,7 +67,6 @@ module.exports = function (RED) {
             done(err);
             return;
           }
-
           console.error(err);
         });
     });
