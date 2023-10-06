@@ -14,7 +14,7 @@ module.exports = function (RED) {
 
       const nodeUrl = `https://${this.server.host}:${this.server.port}`;
       const apiKey =
-        "cXBaQzRvb0JTR3I0Y2NEZDduOG46RlVSZjNOOGRUVHlPVFFZWlVaU3VPQQ==";
+        "bmYtRUE0c0J1LWxUVkF6RXFLTks6QjZtWThsNUdRVy0tMXIwYTNBWFF6QQ==";
 
       this.esClient = new Client({
         node: nodeUrl,
