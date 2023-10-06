@@ -22,7 +22,7 @@ module.exports = function (RED) {
           apiKey,
         },
         caFingerprint:
-          "13:7E:D2:98:E0:C8:62:CA:96:75:2A:21:22:5F:68:5B:C0:21:BC:CB:07:29:AC:80:C1:0C:B5:D6:E4:B4:04:B2",
+          "1A:CB:78:4A:4C:C7:50:EC:39:96:CE:61:EA:C4:46:6A:30:11:19:31:F3:EA:CA:C7:C5:C8:8A:46:AF:BF:2A:0C",
         tls: {
           rejectUnauthorized: false,
         },
